@@ -6,6 +6,7 @@
   --header-background-color: 18, 18, 18; /* #121212 */
   --main-font-color: 55, 65, 81; /*#374151 */
   --header-font-color: whitesmoke;
+  --light-font-color: #909090;
   --border-style: 1px solid #d1d5db;
   --border-radius: 8px;
 }
@@ -17,9 +18,16 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
   font-family: 'Inter', sans-serif;
   color: rgb(var(--main-font-color));
   background-color: var(--main-background-color);
+}
+
+main {
+  flex-grow: 1;
 }
 
 form {
@@ -79,6 +87,7 @@ a {
 
 .container {
   max-width: 1440px;
+  height: 100%;
   margin: 0 auto;
   padding: 1.5em;
 
@@ -165,5 +174,23 @@ a {
       color: var(--main-background-color);
       background-color: rgb(var(--main-font-color));
     }
+  }
+}
+
+.start-search {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-font-color);
+
+  .icon {
+    font-size: 6rem;
+  }
+
+  .message {
+    font-size: 2rem;
+    font-weight: bold;
   }
 }
