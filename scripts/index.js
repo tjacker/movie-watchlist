@@ -1,3 +1,7 @@
-import API_KEY from './api.js';
+import API_KEY from './api-key.js';
 
-console.log(API_KEY);
+const form = document.querySelector('form');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+});

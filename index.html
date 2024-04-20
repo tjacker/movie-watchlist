@@ -13,11 +13,23 @@
   <header class="header-section">
     <div class="content container">
       <h1 class="title">Find your Flick</h1>
-      <a class="link" href="watchlist.html">My Watch List <i class="fa-solid fa-clapperboard"></i></a>
+      <a class="link" href="watchlist.html">My Watch List
+        <span><i class="fa-solid fa-clapperboard"></i></span>
+      </a>
     </div>
   </header>
 
-  <main class="main-section"></main>
+  <main class="main-section">
+    <div class="container">
+      <form class="search">
+        <i class="icon fa-solid fa-fw fa-lg fa-magnifying-glass"></i>
+        <input class="input" type="text" name="search" id="search" placeholder="Search for movie"
+          aria-label="Search for movie">
+        <button class="btn" type="submit">Search</button>
+      </form>
+    </div>
+  </main>
+
   <script src="scripts/index.js" type="module"></script>
 </body>
 

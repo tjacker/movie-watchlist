@@ -2,9 +2,12 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 :root {
-  --background-color: 18, 18, 18; /* #121212 */
-  --font-color: whitesmoke;
-  --large-viewport: 1024px;
+  --main-background-color: white;
+  --header-background-color: 18, 18, 18; /* #121212 */
+  --main-font-color: 55, 65, 81; /*#374151 */
+  --header-font-color: whitesmoke;
+  --border-style: 1px solid #d1d5db;
+  --border-radius: 8px;
 }
 
 *,
@@ -15,17 +18,49 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  color: rgb(var(--main-font-color));
+  background-color: var(--main-background-color);
 }
 
-input,
-button {
+form {
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  background-color: var(--main-background-color);
+  border: var(--border-style);
+  border-radius: var(--border-radius);
+  margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    margin-top: -4.5rem;
+  }
+}
+
+a,
+button,
+input {
   font-family: inherit;
+  color: inherit;
+
+  &:focus,
+  &:focus-visible {
+    outline: 2px solid rgba(55, 65, 81, 0.35);
+    outline-offset: -3px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+input {
+  padding: 0 0.5em;
 }
 
 a {
   position: relative;
   font-weight: 700;
-  color: var(--font-color);
+  color: var(--header-font-color);
   text-decoration: none;
 
   &:hover::after {
@@ -34,7 +69,7 @@ a {
     width: 100%;
     left: 0;
     bottom: -5px;
-    border-bottom: 3px solid var(--font-color);
+    border-bottom: 3px solid var(--header-font-color);
   }
 
   & i {
@@ -45,7 +80,7 @@ a {
 .container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 2em;
+  padding: 1.5em;
 
   @media (min-width: 1024px) {
     padding: 3em;
@@ -53,15 +88,15 @@ a {
 }
 
 .header-section {
-  color: var(--font-color);
+  color: var(--header-font-color);
 
   .content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
-    background-color: rgb(var(--background-color));
-    background: linear-gradient(rgb(var(--background-color), 0.75), rgb(var(--background-color), 0.75)),
+    background-color: rgb(var(--header-background-color));
+    background: linear-gradient(rgb(var(--header-background-color), 0.7), rgb(var(--header-background-color), 0.7)),
       url('./images/header-background.png');
     background-size: cover;
     background-position: center;
@@ -85,8 +120,50 @@ a {
   .link {
     align-self: flex-end;
 
+    &:focus,
+    &:focus-visible {
+      outline-color: var(--header-font-color);
+      outline-offset: 4px;
+    }
+
     @media (min-width: 1024px) {
       align-self: auto;
+    }
+  }
+}
+
+.search {
+  .icon {
+    color: #9da3af;
+    margin: 0 0.5em;
+  }
+
+  .input {
+    flex-grow: 1;
+    align-self: stretch;
+    border: none;
+
+    &::placeholder {
+      color: #6b7280;
+    }
+  }
+
+  .btn {
+    cursor: pointer;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-left: var(--border-style);
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+
+    @media (min-width: 1024px) {
+      padding: 0.75em 2.25em;
+    }
+
+    &:hover {
+      color: var(--main-background-color);
+      background-color: rgb(var(--main-font-color));
     }
   }
 }
