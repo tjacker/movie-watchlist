@@ -47,7 +47,7 @@ import API_KEY from './api-key.js';
             </div>
             <div class="title-container">
               <h2 class="title">${movie.Title}</h2>
-              <div>
+              <div class="rating-container">
                 <i class="icon fa-solid fa-fw fa-star" aria-hidden="true"></i>
                 <span>${movie.imdbRating}</span>
               </div>
@@ -55,7 +55,10 @@ import API_KEY from './api-key.js';
             <div class="information-container">
               <div>${movie.Runtime}</div>
               <div>${movie.Genre}</div>
-              <div>Watch list</div>
+              <button class="btn" type="button">
+                <i class="icon fa-solid fa-circle-plus" aria-hidden="true"></i>
+                <span>Watch list</span>
+              </button>
             </div>
             <p class="plot">${movie.Plot}</p>
           </div>

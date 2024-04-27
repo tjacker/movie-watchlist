@@ -5,8 +5,10 @@
   --main-background-color: white;
   --header-background-color: 18, 18, 18; /* #121212 */
   --main-font-color: 55, 65, 81; /*#374151 */
+  --btn-background-color: #efefef;
   --header-font-color: whitesmoke;
   --light-font-color: #909090;
+  --rating-icon-color: #fec555;
   --border-style: 1px solid #d1d5db;
   --border-radius: 8px;
 }
@@ -17,24 +19,18 @@
   box-sizing: border-box;
 }
 
+html {
+  line-height: 1.4;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   color: rgb(var(--main-font-color));
   background-color: var(--main-background-color);
 }
 
-form {
-  max-width: 600px;
-  display: flex;
-  align-items: center;
-  background-color: var(--main-background-color);
-  border: var(--border-style);
-  border-radius: var(--border-radius);
-  margin: 0 auto;
-
-  @media (min-width: 1024px) {
-    margin-top: -4.5rem;
-  }
+p {
+  margin-top: 0;
 }
 
 a,
@@ -54,8 +50,12 @@ input {
   }
 }
 
+button {
+  cursor: pointer;
+}
+
 input {
-  padding: 0 0.5em;
+  padding: 0 0.5rem;
 }
 
 a {
@@ -74,7 +74,21 @@ a {
   }
 
   & i {
-    padding-left: 0.5em;
+    padding-left: 0.5rem;
+  }
+}
+
+form {
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  background-color: var(--main-background-color);
+  border: var(--border-style);
+  border-radius: var(--border-radius);
+  margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    margin-top: -4.5rem;
   }
 }
 
@@ -82,10 +96,10 @@ a {
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
-  padding: 1.5em;
+  padding: 1.25rem;
 
   @media (min-width: 1024px) {
-    padding: 3em;
+    padding: 3rem;
   }
 }
 
@@ -137,7 +151,7 @@ a {
 .search-form {
   .icon {
     color: #9da3af;
-    margin: 0 0.5em;
+    margin: 0 0.5rem;
 
     @media (max-width: 511px) {
       display: none;
@@ -157,8 +171,8 @@ a {
   }
 
   .btn {
-    cursor: pointer;
-    padding: 0.75em 1.5em;
+    background-color: var(--btn-background-color);
+    padding: 0.75rem 1.5rem;
     border: none;
     border-left: var(--border-style);
     border-top-right-radius: inherit;
@@ -166,7 +180,7 @@ a {
     transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
 
     @media (min-width: 1024px) {
-      padding: 0.75em 2.25em;
+      padding: 0.75rem 2.25rem;
     }
 
     &:hover {
@@ -185,10 +199,10 @@ a {
   flex-direction: column;
   align-items: center;
   color: var(--light-font-color);
-  margin-top: 6em;
+  margin-top: 6rem;
 
   @media (min-width: 1024px) {
-    margin-top: 8em;
+    margin-top: 8rem;
   }
 
   .icon {
@@ -211,36 +225,73 @@ a {
 
 .result-container {
   display: grid;
-  gap: 1em;
+  gap: 0.75rem;
   grid-template-columns: 100px auto;
   grid-template-areas:
     'image title'
     'image information'
     'plot plot';
+  font-size: 0.875rem;
+  border-bottom: var(--border-style);
+  margin: 1.5rem 0;
+  padding-bottom: 1.5rem;
 
-  .image-container {
-    grid-area: image;
-    width: 100px;
-  }
-
-  .image {
-    max-width: 100%;
-  }
-
-  .title-container {
-    grid-area: title;
-  }
-
-  .title {
-    font-size: 1.25rem;
-    margin-top: 0;
-  }
-
-  .information-container {
-    grid-area: information;
+  &:not(:first-of-type) {
+    margin-top: 1rem;
   }
 
   .plot {
     grid-area: plot;
+    margin-bottom: 0;
+  }
+}
+
+.image-container {
+  grid-area: image;
+  width: 100px;
+
+  .image {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+.title-container {
+  grid-area: title;
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0 0 0.25rem;
+  }
+}
+
+.rating-container {
+  .icon {
+    color: var(--rating-icon-color);
+  }
+}
+
+.information-container {
+  grid-area: information;
+
+  .btn {
+    background-color: transparent;
+    line-height: inherit;
+    padding: 0;
+    border: none;
+    transition: background-color 250ms ease-in-out;
+
+    .icon {
+      transition: transform 250ms ease-in-out;
+    }
+
+    &:hover {
+      background-color: var(--btn-background-color);
+
+      .icon {
+        transform: scale(1.1);
+      }
+    }
   }
 }
