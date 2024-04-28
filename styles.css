@@ -5,9 +5,10 @@
   --main-background-color: white;
   --header-background-color: 18, 18, 18; /* #121212 */
   --main-font-color: 55, 65, 81; /*#374151 */
-  --btn-background-color: #efefef;
+  --btn-background-color: #e6e6e6;
   --header-font-color: whitesmoke;
-  --light-font-color: #909090;
+  --light-font-color: #7e8390;
+  --no-results-font-color: #909090;
   --rating-icon-color: #fec555;
   --border-style: 1px solid #d1d5db;
   --border-radius: 8px;
@@ -100,6 +101,31 @@ form {
 
   @media (min-width: 1024px) {
     padding: 3rem;
+  }
+}
+
+.btn-text {
+  background-color: transparent;
+  line-height: inherit;
+  padding: 0 0.0625rem;
+  border: none;
+  transition: background-color 250ms ease-in-out;
+
+  .icon {
+    transition: transform 250ms ease-in-out;
+  }
+
+  &:hover {
+    background-color: var(--btn-background-color);
+
+    .icon {
+      transform: scale(1.1);
+    }
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline-offset: 0;
   }
 }
 
@@ -198,7 +224,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--light-font-color);
+  color: var(--no-results-font-color);
   margin-top: 6rem;
 
   @media (min-width: 1024px) {
@@ -239,11 +265,6 @@ form {
   &:not(:first-of-type) {
     margin-top: 1rem;
   }
-
-  .plot {
-    grid-area: plot;
-    margin-bottom: 0;
-  }
 }
 
 .image-container {
@@ -262,7 +283,14 @@ form {
   .title {
     font-size: 1.25rem;
     font-weight: 500;
+    line-height: 1.2;
     margin: 0 0 0.25rem;
+  }
+
+  .year {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--light-font-color);
   }
 }
 
@@ -274,24 +302,33 @@ form {
 
 .information-container {
   grid-area: information;
+}
 
-  .btn {
-    background-color: transparent;
-    line-height: inherit;
-    padding: 0;
-    border: none;
-    transition: background-color 250ms ease-in-out;
+.plot-container {
+  grid-area: plot;
 
-    .icon {
-      transition: transform 250ms ease-in-out;
+  .plot {
+    display: inline;
+    color: var(--light-font-color);
+    margin-bottom: 0;
+  }
+
+  .overflow {
+    display: none;
+  }
+
+  .read-more {
+    font-weight: 500;
+  }
+
+  &.expanded {
+    .ellipsis {
+      display: none;
     }
 
-    &:hover {
-      background-color: var(--btn-background-color);
-
-      .icon {
-        transform: scale(1.1);
-      }
+    .overflow {
+      display: inline;
+      outline: none;
     }
   }
 }

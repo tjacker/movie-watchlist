@@ -46,7 +46,7 @@ import API_KEY from './api-key.js';
               <img class="image" src="${movie.Poster}" alt="" aria-hidden="true">
             </div>
             <div class="title-container">
-              <h2 class="title">${movie.Title}</h2>
+              <h2 class="title">${movie.Title} <span class="year">(${movie.Year})</span></h2>
               <div class="rating-container">
                 <i class="icon fa-solid fa-fw fa-star" aria-hidden="true"></i>
                 <span>${movie.imdbRating}</span>
@@ -55,18 +55,50 @@ import API_KEY from './api-key.js';
             <div class="information-container">
               <div>${movie.Runtime}</div>
               <div>${movie.Genre}</div>
-              <button class="btn" type="button">
+              <button class="btn-text" type="button">
                 <i class="icon fa-solid fa-circle-plus" aria-hidden="true"></i>
                 <span>Watch list</span>
               </button>
             </div>
-            <p class="plot">${movie.Plot}</p>
+            <div class="plot-container">
+              ${renderPlot(movie.Plot)}
+            </div>
           </div>
         `;
       })
       .join('');
 
     searchResultsEl.innerHTML = resultsHTML;
+
+    setAddEventListeners();
+  }
+
+  function renderPlot(plot) {
+    const plotWordLimit = 20;
+    const plotArray = plot.split(' ');
+
+    if (plotArray.length <= plotWordLimit) return `<p class="plot">${plot}</p>`;
+
+    return `
+      <p class="plot">${plotArray.slice(0, plotWordLimit).join(' ')}<span class="ellipsis">...</span></p>
+      <p class="plot overflow" tabindex="-1">${plotArray.slice(plotWordLimit).join(' ')}</p>
+      <button class="btn-text read-more" type="button">Read more</button>
+    `;
+  }
+
+  function setAddEventListeners() {
+    const plotContainers = document.querySelectorAll('.plot-container');
+
+    plotContainers.forEach((plotContainer) => {
+      const readMore = plotContainer.querySelector('.read-more');
+      const overflow = plotContainer.querySelector('.overflow');
+
+      readMore.addEventListener('click', () => {
+        plotContainer.classList.add('expanded');
+        overflow.focus();
+        readMore.remove();
+      });
+    });
   }
 
   const data = [
