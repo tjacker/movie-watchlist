@@ -53,7 +53,7 @@ import API_KEY from './api-key.js';
               </div>
             </div>
             <div class="information-container">
-              <div>${movie.Runtime}</div>
+              <div>${convertRunTime(movie.Runtime)}</div>
               <div>${movie.Genre}</div>
               <button class="btn-text" type="button">
                 <i class="icon fa-solid fa-circle-plus" aria-hidden="true"></i>
@@ -71,6 +71,16 @@ import API_KEY from './api-key.js';
     searchResultsEl.innerHTML = resultsHTML;
 
     setAddEventListeners();
+  }
+
+  function convertRunTime(runtime) {
+    const runtimeInt = parseInt(runtime);
+    const hours = Math.trunc(runtimeInt / 60);
+    const minutes = runtimeInt % 60;
+    const hoursStr = hours ? `${hours} hr${hours > 1 ? 's' : ''}` : '';
+    const minutesStr = minutes ? `${minutes} min${minutes > 1 ? 's' : ''}` : '';
+
+    return `${hoursStr} ${minutesStr}`.trim();
   }
 
   function renderPlot(plot) {
