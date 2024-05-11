@@ -21,7 +21,7 @@
 }
 
 html {
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 body {
@@ -88,18 +88,18 @@ form {
   border-radius: var(--border-radius);
   margin: 0 auto;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     margin-top: -4.5rem;
   }
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1200px;
   height: 100%;
   margin: 0 auto;
   padding: 1.25rem;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     padding: 3rem;
   }
 }
@@ -143,7 +143,7 @@ form {
     background-size: cover;
     background-position: center;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -154,7 +154,7 @@ form {
   .title {
     margin: 0;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       font-size: 2.5rem;
     }
   }
@@ -168,7 +168,7 @@ form {
       outline-offset: 4px;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       align-self: auto;
     }
   }
@@ -205,7 +205,7 @@ form {
     border-bottom-right-radius: inherit;
     transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       padding: 0.75rem 2.25rem;
     }
 
@@ -218,6 +218,11 @@ form {
 
 .search-results {
   margin-top: 2rem;
+
+  @media (min-width: 768px) {
+    width: min(100%, 90ch);
+    margin: 3rem auto;
+  }
 }
 
 .start-search {
@@ -227,14 +232,14 @@ form {
   color: var(--no-results-font-color);
   margin-top: 6rem;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     margin-top: 8rem;
   }
 
   .icon {
     font-size: 4rem;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       font-size: 6rem;
     }
   }
@@ -243,7 +248,7 @@ form {
     font-size: 1.5rem;
     font-weight: bold;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       font-size: 2rem;
     }
   }
@@ -253,6 +258,7 @@ form {
   display: grid;
   gap: 0.75rem;
   grid-template-columns: 100px auto;
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     'image title'
     'image information'
@@ -265,6 +271,17 @@ form {
   &:not(:first-of-type) {
     margin-top: 1rem;
   }
+
+  @media (min-width: 768px) {
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    grid-template-columns: 150px auto;
+    grid-template-areas:
+      'image title'
+      'image information'
+      'image plot';
+    font-size: 1rem;
+  }
 }
 
 .image-container {
@@ -275,16 +292,31 @@ form {
     display: block;
     max-width: 100%;
   }
+
+  @media (min-width: 768px) {
+    width: 150px;
+  }
 }
 
 .title-container {
   grid-area: title;
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
 
   .title {
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 1.2;
     margin: 0 0 0.25rem;
+
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+      margin-bottom: 0;
+    }
   }
 
   .year {
@@ -302,6 +334,12 @@ form {
 
 .information-container {
   grid-area: information;
+
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
 }
 
 .plot-container {
@@ -309,6 +347,7 @@ form {
 
   .plot {
     display: inline;
+    font-size: 0.875rem;
     color: var(--light-font-color);
     margin-bottom: 0;
   }

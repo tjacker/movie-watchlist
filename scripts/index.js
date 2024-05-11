@@ -84,7 +84,7 @@ import API_KEY from './api-key.js';
   }
 
   function renderPlot(plot) {
-    const plotWordLimit = 20;
+    const plotWordLimit = 40;
     const plotArray = plot.split(' ');
 
     if (plotArray.length <= plotWordLimit) return `<p class="plot">${plot}</p>`;
