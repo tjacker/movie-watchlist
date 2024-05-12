@@ -340,6 +340,23 @@ form {
 }
 
 .rating-container {
+  white-space: nowrap;
+
+  &.large-view {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    &.small-view {
+      display: none;
+    }
+
+    &.large-view {
+      display: initial;
+      font-size: 1rem;
+    }
+  }
+
   .icon {
     color: var(--rating-icon-color);
   }
@@ -370,6 +387,7 @@ form {
   }
 
   .read-more {
+    font-size: 0.875rem;
     font-weight: 500;
   }
 

@@ -38,20 +38,26 @@ import API_KEY from './api-key.js';
   }
 
   function renderResults(searchResults) {
-    const resultsHTML = data
+    const resultsHTML = searchResults
       .map((movie) => {
         return `
-          <div class="result-container">
+          <section class="result-container">
             <div class="image-container">
               <img class="image" src="${movie.Poster}" alt="" aria-hidden="true">
             </div>
-            <div class="title-container">
-              <h2 class="title">${movie.Title} <span class="year">(${movie.Year})</span></h2>
-              <div class="rating-container">
+            <header class="title-container">
+              <h2 class="title">${movie.Title}
+                <span class="year">(${movie.Year})</span>
+                <span title="IMDb rating" class="rating-container large-view">
+                  <i class="icon fa-solid fa-fw fa-star" aria-hidden="true"></i>
+                  <span>${movie.imdbRating}</span>
+                </span>
+              </h2>
+              <span title="IMDb rating" class="rating-container small-view">
                 <i class="icon fa-solid fa-fw fa-star" aria-hidden="true"></i>
                 <span>${movie.imdbRating}</span>
-              </div>
-            </div>
+              </span>
+            </header>
             <div class="information-container">
               <div>${convertRunTime(movie.Runtime)}</div>
               <div>${movie.Genre}</div>
@@ -63,7 +69,7 @@ import API_KEY from './api-key.js';
             <div class="plot-container">
               ${renderPlot(movie.Plot)}
             </div>
-          </div>
+          </section>
         `;
       })
       .join('');
