@@ -61,9 +61,15 @@ input {
 
 a {
   position: relative;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--header-font-color);
   text-decoration: none;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
 
   &:hover::after {
     position: absolute;
@@ -153,9 +159,16 @@ form {
 
   .title {
     margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    span {
+      font-weight: 300;
+    }
 
     @media (min-width: 768px) {
-      font-size: 2.5rem;
+      font-size: 2.25rem;
     }
   }
 
