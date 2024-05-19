@@ -21,8 +21,7 @@ import API_KEY from './api-key.js';
           renderNoResults(searchTerm);
         }
       } catch (error) {
-        // TODO: render an error message to search results
-        console.log(error);
+        renderErrorMessage();
       }
     }
   });
@@ -87,7 +86,16 @@ import API_KEY from './api-key.js';
     searchResultsEl.innerHTML = `
       <div class="start-search">
         <i class="icon fa-solid fa-fw fa-film" aria-hidden="true"></i>
-        <p class="message">Sorry, no movies found that include the term '${searchTerm}'.</p>
+        <p class="message">Sorry, no movies were found.</p>
+      </div>
+    `;
+  }
+
+  function renderErrorMessage() {
+    searchResultsEl.innerHTML = `
+      <div class="start-search">
+        <i class="icon fa-solid fa-fw fa-film" aria-hidden="true"></i>
+        <p class="message">There was an issue. Please try again later.</p>
       </div>
     `;
   }
@@ -123,11 +131,11 @@ import API_KEY from './api-key.js';
       const overflow = plotContainer.querySelector('.overflow');
 
       if (readMore != null) {
-      readMore.addEventListener('click', () => {
-        plotContainer.classList.add('expanded');
-        overflow.focus();
-        readMore.remove();
-      });
+        readMore.addEventListener('click', () => {
+          plotContainer.classList.add('expanded');
+          overflow.focus();
+          readMore.remove();
+        });
       }
     });
   }
