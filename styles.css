@@ -6,6 +6,7 @@
   --header-background-color: 18, 18, 18; /* #121212 */
   --main-font-color: 55, 65, 81; /*#374151 */
   --btn-background-color: #e6e6e6;
+  --add-btn-background-color: #119d53;
   --header-font-color: whitesmoke;
   --light-font-color: #7e8390;
   --no-results-font-color: #909090;
@@ -258,11 +259,13 @@ form {
   }
 
   .message {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: bold;
+    text-align: center;
+    margin: 1em 0 0;
 
     @media (min-width: 768px) {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 }
@@ -369,6 +372,10 @@ form {
     display: flex;
     align-items: baseline;
     gap: 1rem;
+  }
+
+  .icon-add {
+    color: var(--add-btn-background-color);
   }
 }
 

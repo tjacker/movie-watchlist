@@ -11,16 +11,20 @@ import API_KEY from './api-key.js';
     const searchTerm = searchInput.value;
     renderResults([]);
 
-    // if (searchTerm) {
-    //   try {
-    //     const searchResults = await getSearchResults(searchTerm);
+    if (searchTerm) {
+      try {
+        const searchResults = await getSearchResults(searchTerm);
 
-    //     renderResults(searchResults);
-    //   } catch (error) {
-    //     // TODO: render an error message to search results
-    //     console.log(error);
-    //   }
-    // }
+        if (searchResults.length > 0) {
+          renderResults(searchResults);
+        } else {
+          renderNoResults(searchTerm);
+        }
+      } catch (error) {
+        // TODO: render an error message to search results
+        console.log(error);
+      }
+    }
   });
 
   async function getSearchResults(searchTerm) {
@@ -62,7 +66,7 @@ import API_KEY from './api-key.js';
               <div>${convertRunTime(movie.Runtime)}</div>
               <div>${movie.Genre}</div>
               <button class="btn-text" type="button">
-                <i class="icon fa-solid fa-circle-plus" aria-hidden="true"></i>
+                <i class="icon icon-add fa-solid fa-circle-plus" aria-hidden="true"></i>
                 <span>Watch list</span>
               </button>
             </div>
@@ -77,6 +81,15 @@ import API_KEY from './api-key.js';
     searchResultsEl.innerHTML = resultsHTML;
 
     setAddEventListeners();
+  }
+
+  function renderNoResults(searchTerm) {
+    searchResultsEl.innerHTML = `
+      <div class="start-search">
+        <i class="icon fa-solid fa-fw fa-film" aria-hidden="true"></i>
+        <p class="message">Sorry, no movies found that include the term '${searchTerm}'.</p>
+      </div>
+    `;
   }
 
   function convertRunTime(runtime) {
