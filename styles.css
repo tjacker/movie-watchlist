@@ -335,10 +335,14 @@ form {
     }
   }
 
-  .year {
-    font-size: 1rem;
+  .metadata {
+    font-size: 0.875rem;
     font-weight: 400;
     color: var(--light-font-color);
+
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
   }
 }
 

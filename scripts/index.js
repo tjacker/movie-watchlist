@@ -48,7 +48,7 @@ import { debounce } from './utils.js';
             </div>
             <header class="title-container">
               <h2 class="title">${movie.Title}
-                <span class="year">(${movie.Year})</span>
+                <span class="metadata">(${movie.Year} - ${movie.Rated})</span>
                 <span title="IMDb rating" class="rating-container large-view">
                   <i class="icon fa-solid fa-fw fa-star" aria-hidden="true"></i>
                   <span>${movie.imdbRating}</span>
