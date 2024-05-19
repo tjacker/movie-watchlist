@@ -122,11 +122,13 @@ import API_KEY from './api-key.js';
       const readMore = plotContainer.querySelector('.read-more');
       const overflow = plotContainer.querySelector('.overflow');
 
+      if (readMore != null) {
       readMore.addEventListener('click', () => {
         plotContainer.classList.add('expanded');
         overflow.focus();
         readMore.remove();
       });
+      }
     });
   }
 
