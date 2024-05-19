@@ -6,7 +6,7 @@
   --header-background-color: 18, 18, 18; /* #121212 */
   --main-font-color: 55, 65, 81; /*#374151 */
   --btn-background-color: #e6e6e6;
-  --add-btn-background-color: #119d53;
+  --remove-btn-color: #ef2e5c; /* #e83a00 */
   --header-font-color: whitesmoke;
   --light-font-color: #7e8390;
   --no-results-font-color: #909090;
@@ -374,8 +374,8 @@ form {
     gap: 1rem;
   }
 
-  .icon-add {
-    color: var(--add-btn-background-color);
+  .icon-remove {
+    color: var(--remove-btn-color);
   }
 }
 

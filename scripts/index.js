@@ -1,4 +1,5 @@
 import API_KEY from './api-key.js';
+import { debounce } from './utils.js';
 
 (function () {
   const form = document.querySelector('form');
@@ -6,38 +7,35 @@ import API_KEY from './api-key.js';
   const searchResultsEl = document.getElementById('searchResults');
   const urlSearch = `http://www.omdbapi.com/?apikey=${API_KEY}&type=movie`;
 
-  form.addEventListener('submit', async (event) => {
+  const debounceGetSearchResults = debounce(getSearchResults);
+
+  form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const searchTerm = searchInput.value;
-    renderResults([]);
+    const searchTerm = searchInput.value.trim();
 
-    if (searchTerm) {
-      try {
-        const searchResults = await getSearchResults(searchTerm);
-
-        if (searchResults.length > 0) {
-          renderResults(searchResults);
-        } else {
-          renderNoResults(searchTerm);
-        }
-      } catch (error) {
-        renderErrorMessage();
-      }
+    if (searchTerm !== '') {
+      debounceGetSearchResults(searchTerm);
     }
   });
 
   async function getSearchResults(searchTerm) {
-    const response = await fetch(`${urlSearch}&s=${searchTerm}`);
-    const data = await response.json();
+    try {
+      const response = await fetch(`${urlSearch}&s=${searchTerm}`);
+      const data = await response.json();
 
-    if (data.Response === 'False') return [];
+      if (data.Response === 'False') return renderMessage('Sorry, no movies were found.');
 
-    return Promise.all(
-      data.Search.map(async (movie) => {
-        const response = await fetch(`${urlSearch}&plot=full&i=${movie.imdbID}`);
-        return response.json();
-      })
-    );
+      const searchResults = await Promise.all(
+        data.Search.map(async (movie) => {
+          const response = await fetch(`${urlSearch}&plot=full&i=${movie.imdbID}`);
+          return response.json();
+        })
+      );
+
+      renderResults(searchResults);
+    } catch (error) {
+      renderMessage('There was an issue. Please try again later.');
+    }
   }
 
   function renderResults(searchResults) {
@@ -65,7 +63,7 @@ import API_KEY from './api-key.js';
               <div>${convertRunTime(movie.Runtime)}</div>
               <div>${movie.Genre}</div>
               <button class="btn-text" type="button">
-                <i class="icon icon-add fa-solid fa-circle-plus" aria-hidden="true"></i>
+                <i class="icon fa-solid fa-circle-plus" aria-hidden="true"></i>
                 <span>Watch list</span>
               </button>
             </div>
@@ -82,20 +80,11 @@ import API_KEY from './api-key.js';
     setAddEventListeners();
   }
 
-  function renderNoResults(searchTerm) {
+  function renderMessage(message) {
     searchResultsEl.innerHTML = `
       <div class="start-search">
         <i class="icon fa-solid fa-fw fa-film" aria-hidden="true"></i>
-        <p class="message">Sorry, no movies were found.</p>
-      </div>
-    `;
-  }
-
-  function renderErrorMessage() {
-    searchResultsEl.innerHTML = `
-      <div class="start-search">
-        <i class="icon fa-solid fa-fw fa-film" aria-hidden="true"></i>
-        <p class="message">There was an issue. Please try again later.</p>
+        <p class="message">${message}</p>
       </div>
     `;
   }
