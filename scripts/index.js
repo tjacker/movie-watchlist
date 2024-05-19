@@ -21,9 +21,16 @@ import { debounce } from './utils.js';
   async function getSearchResults(searchTerm) {
     try {
       const response = await fetch(`${urlSearch}&s=${searchTerm}`);
+
+      if (response.ok === false) {
+        throw new Error();
+      }
+
       const data = await response.json();
 
-      if (data.Response === 'False') return renderMessage('Sorry, no movies were found.');
+      if (response.ok === true && data.Response === 'False') {
+        return renderMessage('Sorry, no movies were found.');
+      }
 
       const searchResults = await Promise.all(
         data.Search.map(async (movie) => {
@@ -33,7 +40,7 @@ import { debounce } from './utils.js';
       );
 
       renderResults(searchResults);
-    } catch (error) {
+    } catch (err) {
       renderMessage('There was an issue. Please try again later.');
     }
   }
